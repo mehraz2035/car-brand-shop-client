@@ -54,11 +54,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/update/:id",
-        element: <UpdateProduct></UpdateProduct>
+        element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>
       },
       {
         path: "/cars/:brand",
-        element: <Cars></Cars>
+        element: <PrivateRoute><Cars></Cars></PrivateRoute>
       },
       {
         path: "/details/:id",

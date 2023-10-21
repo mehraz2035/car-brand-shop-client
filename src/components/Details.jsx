@@ -13,7 +13,7 @@ const Details = () => {
                 console.log(data);
                 setDetails(data);
             });
-    }, [id]); // Include id as a dependency in the useEffect dependency array
+    }, [id]); 
 
    
     const hadnleAddToCart = () => {

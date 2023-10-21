@@ -15,50 +15,13 @@ const UpdateProduct = () => {
                 console.log(data);
                 setDetails(data);
             });
-    }, [id]); // Include id as a dependency in the useEffect dependency array
-
-    // const handleUpdate = event => {
-    //     event.preventDefault();
-
-        // const form = event.target;
-        // const image = form.image.value;
-        // const name = form.name.value;
-        // const brand = form.brand.value;
-        // const category = form.category.value;
-        // const price = form.price.value;
-        // const description = form.description.value;
-        // const rating = form.rating.value;
-
-        // const formUpdate = { image, name, brand, category, price, description, rating }
-        // console.log(formUpdate)
-
-    //     fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars/${id}`, {
-    //         method: "put",
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(formUpdate)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             if (data.insertedId) {
-    //                 Swal.fire({
-    //                     title: 'Success!',
-    //                     text: 'Car Added Successfully',
-    //                     icon: 'success',
-    //                     confirmButtonText: 'OK'
-    //                 })
-
-    //             }
-    //         })
-    // }
+    }, [id]);
 
 
 
     const handleUpdate = event => {
         event.preventDefault();
-    
+
         const form = event.target;
         const image = form.image.value;
         const name = form.name.value;
@@ -70,7 +33,7 @@ const UpdateProduct = () => {
 
         const formUpdate = { image, name, brand, category, price, description, rating }
         console.log(formUpdate)
-    
+
         fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars/${id}`, {
             method: "put",
             headers: {
@@ -78,34 +41,34 @@ const UpdateProduct = () => {
             },
             body: JSON.stringify(formUpdate)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if (data.modifiedCount) {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Updated Successfully',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                })
-                
-            }
-             else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Failed To Update Unsuccessfully',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            }
-        })
-       
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Updated Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+
+                }
+                else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Failed To Update Unsuccessfully',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            })
+
     };
-    
+
 
 
     return (
-        
+
 
 
 
@@ -116,7 +79,7 @@ const UpdateProduct = () => {
 
             <h2 className="text-3xl font-extrabold">Update Car</h2>
             <form onSubmit={handleUpdate}>
-                {/* form name and quantity row */}
+
                 <div className="md:flex mb-8">
                     <div className="form-control md:w-1/2">
                         <label className="label">
@@ -136,7 +99,7 @@ const UpdateProduct = () => {
                     </div>
 
                 </div>
-                {/* form supplier row */}
+
                 <div className="md:flex mb-8">
                     <div className="form-control md:w-1/2">
                         <label className="label">
@@ -155,7 +118,7 @@ const UpdateProduct = () => {
                         </label>
                     </div>
                 </div>
-                {/* form category and details row */}
+
                 <div className="md:flex mb-8">
                     <div className="form-control md:w-1/2">
                         <label className="label">
@@ -174,7 +137,7 @@ const UpdateProduct = () => {
                         </label>
                     </div>
                 </div>
-                {/* form Photo url row */}
+
                 <div className="mb-8">
                     <div className="form-control w-full">
                         <label className="label">

@@ -1,79 +1,79 @@
-import  { useContext } from "react";
+import { useContext } from "react";
 
 import { Link } from "react-router-dom";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase/firebase.config"; // Assuming you have the Firebase Storage config in firebase.config.js
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase/firebase.config";
 import { AuthContext } from "../providres/AuthProvidres";
 
 function fileToUint8Array(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const arrayBuffer = reader.result;
-      const uint8Array = new Uint8Array(arrayBuffer);
-      resolve(uint8Array);
-    };
-    reader.onerror = reject;
-    reader.readAsArrayBuffer(file);
-  });
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const arrayBuffer = reader.result;
+            const uint8Array = new Uint8Array(arrayBuffer);
+            resolve(uint8Array);
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+    });
 }
 
 const SignUp = () => {
-  const { createAccount, updateUserProfile, googleLogin } = useContext(AuthContext);
+    const { createAccount, updateUserProfile, googleLogin } = useContext(AuthContext);
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const image = form.image.files[0]; // Get the selected image file
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const image = form.image.files[0];
 
-    const email = form.email.value;
-    const password = form.password.value;
+        const email = form.email.value;
+        const password = form.password.value;
 
-    try {
-      // Create a Uint8Array from the image file
-      const uint8Array = await fileToUint8Array(image);
+        try {
 
-      createAccount(email, password)
-        .then((result) => {
-          const createdAt = result.user?.metadata?.creationTime;
-          const user = { email, createdAt: createdAt };
+            const uint8Array = await fileToUint8Array(image);
 
-          // Upload the user's image to Firebase Storage
-          const storageRef = ref(storage, `user-images/${result.user.uid}/${image.name}`);
-          uploadBytes(storageRef, uint8Array).then(() => {
-            // Get the download URL of the uploaded image
-            getDownloadURL(storageRef).then((downloadURL) => {
-              // Update user profile with name and image URL
-              updateUserProfile(name, downloadURL)
-                .then(() => {
-                  fetch("https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/user", {
-                    method: "POST",
-                    headers: {
-                      "content-type": "application/json",
-                    },
-                    body: JSON.stringify(user),
-                  })
-                    .then((res) => res.json())
-                    .then((data) => {
-                      if (data.insertedId) {
-                        console.log("user added to user data");
-                      }
+            createAccount(email, password)
+                .then((result) => {
+                    const createdAt = result.user?.metadata?.creationTime;
+                    const user = { email, createdAt: createdAt };
+
+
+                    const storageRef = ref(storage, `user-images/${result.user.uid}/${image.name}`);
+                    uploadBytes(storageRef, uint8Array).then(() => {
+
+                        getDownloadURL(storageRef).then((downloadURL) => {
+
+                            updateUserProfile(name, downloadURL)
+                                .then(() => {
+                                    fetch("https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/user", {
+                                        method: "POST",
+                                        headers: {
+                                            "content-type": "application/json",
+                                        },
+                                        body: JSON.stringify(user),
+                                    })
+                                        .then((res) => res.json())
+                                        .then((data) => {
+                                            if (data.insertedId) {
+                                                console.log("user added to user data");
+                                            }
+                                        });
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                });
+                        });
                     });
                 })
                 .catch((error) => {
-                  console.error(error);
+                    console.error(error);
                 });
-            });
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <div className="hero  bg-base-200 border-2">
@@ -95,7 +95,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Image</span>
                             </label>
-                            
+
                             <input type="file" name="image" className="file-input text-sm text-lowercase file-input-ghost w-full input-bordered" required />
                         </div>
                         <div className="form-control">

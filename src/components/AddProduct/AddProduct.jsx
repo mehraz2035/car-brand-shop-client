@@ -16,12 +16,11 @@ const AddProduct = () => {
         const description = form.description.value;
         const rating = form.rating.value;
 
-        // dont change const name
         const newCar = { image, name, brand, category, price, description, rating }
 
         console.log(newCar);
 
-        // server site data send dont touch
+
         fetch('https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars', {
             method: 'POST',
             headers: {
@@ -77,9 +76,9 @@ const AddProduct = () => {
                         </label>
                     </div>
                 </div>
-                {/* form supplier row */}
+
                 <div className="md:flex mb-8">
-                <div className="form-control md:w-1/2">
+                    <div className="form-control md:w-1/2">
                         <label className="label">
                             <span className="label-text">Brand</span>
                         </label>
@@ -87,7 +86,7 @@ const AddProduct = () => {
                             <input type="text" name="brand" placeholder="Brand name" className="input input-bordered w-full" />
                         </label>
                     </div>
-                   
+
                     <div className="form-control md:w-1/2 ml-4">
                         <label className="label">
                             <span className="label-text">Category</span>
@@ -97,7 +96,7 @@ const AddProduct = () => {
                         </label>
                     </div>
                 </div>
-                {/* form category and details row */}
+
                 <div className="md:flex mb-8">
                     <div className="form-control md:w-1/2">
                         <label className="label">
@@ -116,7 +115,7 @@ const AddProduct = () => {
                         </label>
                     </div>
                 </div>
-                {/* form Photo url row */}
+
                 <div className="mb-8">
                     <div className="form-control w-full">
                         <label className="label">
@@ -127,7 +126,7 @@ const AddProduct = () => {
                         </label>
                     </div>
                 </div>
-                <input  type="submit" value="Submit" className="btn btn-block bg-black text-white hover:text-black" />
+                <input type="submit" value="Submit" className="btn btn-block bg-black text-white hover:text-black" />
 
             </form>
 
