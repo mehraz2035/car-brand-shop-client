@@ -32,7 +32,7 @@ const Details = () => {
                 if (data.insertedId) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Car update Successfully',
+                        text: 'Adding Successfully',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     })

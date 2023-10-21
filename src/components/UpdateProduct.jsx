@@ -84,7 +84,7 @@ const UpdateProduct = () => {
             if (data.modifiedCount) {
                 Swal.fire({
                     title: 'Success!',
-                    text: 'Car Updated Successfully',
+                    text: 'Updated Successfully',
                     icon: 'success',
                     confirmButtonText: 'OK'
                 })
@@ -93,7 +93,7 @@ const UpdateProduct = () => {
              else {
                 Swal.fire({
                     title: 'Error!',
-                    text: 'Failed to update car details',
+                    text: 'Failed To Update Unsuccessfully',
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });

@@ -15,14 +15,14 @@ const MyCard = () => {
                 if (data.deletedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Car Remove Successfully',
+                        text: 'Remove Successfully',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     })
                 } else {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Car not remove Successfully',
+                        text: 'Remove Unsuccessfully',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     })
