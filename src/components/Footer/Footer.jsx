@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <div className=" bg-base-200 border-t-8 border-t-[#0078d6]">
+        <div className=" bg-base-200 border-t-8 border-t-[#E5E0FF] ">
 
 
             <footer className="footer footer-center p-10 text-base-content rounded  max-w-[1550px] mx-auto">

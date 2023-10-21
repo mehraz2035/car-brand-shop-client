@@ -22,26 +22,31 @@ const Cars = () => {
                 products.map(aaa =>
                    
                         <div key={aaa._id} className="card card-compact 
-                     bg-base-100 shadow-xl border-2 ">
-                            <figure><img src={aaa.image} alt="Shoes" /></figure>
-                            <div className="card-body">
+                     bg-base-100 shadow-xl  rounded-none h-fit ">
+                            <figure ><img src={aaa.image} alt="Shoes" /></figure>
+                            <div className="card-body ">
                                 <h2 className="card-title">{aaa.name}</h2>
                                
+                                <div className='grid grid-cols-2 gap-2'>
                                 <p>Brand : {aaa.brand}</p>
                                 <p>Category : {aaa.category}</p>
                                 <p>Price : {aaa.price}</p>
-                                <p>{aaa. description}</p>
-                                <p>rating : {aaa. rating}</p>
+                                
+                                <p>Rating : {aaa. rating}</p>
 
-                                <div className="card-actions justify-end">
-                                <Link to={`/details/${aaa._id}`}>
-                                    <button className="btn btn-primary">Details</button>
-                                </Link>
-                                <Link to={`/update/${aaa._id}`}>
-                                    <button className='btn btn-primary'>Update</button>
-                                </Link>
                                 </div>
+                                <p>Description : {aaa. description}</p>
+                                
                             </div>
+                            <div className=" mx-3">
+                                <Link to={`/update/${aaa._id}`}>
+                                    <button className='btn rounded-none w-full my-3 bg-[#E5E0FF] text-black '>Update</button>
+                                </Link>
+                                <Link to={`/details/${aaa._id}`}>
+                                    <button className="btn rounded-none w-full my-3 bg-black text-white hover:text-black ">Details</button>
+                                </Link>
+                               
+                                </div>
                         </div>
                     
                 )

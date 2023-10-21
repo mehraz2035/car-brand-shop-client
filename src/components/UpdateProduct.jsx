@@ -68,7 +68,7 @@ const UpdateProduct = () => {
 
 
 
-        <div className="bg-green-100  my-16 p-20 max-w-[1550px] mx-auto">
+        <div className="bg-[#E5E0FF]  my-16 p-20 max-w-[1550px] mx-auto  shadow-xl">
 
 
 

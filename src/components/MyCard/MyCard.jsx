@@ -23,7 +23,7 @@ const MyCard = () => {
         <div className='max-w-[1550px] mx-auto grid grid-cols-2 gap-10 my-20'>
             {cartitems.map((item) => (
 
-                <div key={item._id} className="card card-side rounded-lg bg-green-200 glass">
+                <div key={item._id} className="card card-side rounded-lg bg-[#E5E0FF] glass  shadow-xl">
                     <div className="lg:flex">
                         <img className="sm:h-64 w-screen  lg:w-80 lg:rounded" src={item.details.image} alt="" />
                         <div className="card-body">

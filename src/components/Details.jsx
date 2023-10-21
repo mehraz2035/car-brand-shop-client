@@ -32,7 +32,7 @@ const Details = () => {
 
     return (
         <div className='max-w-[1550px] mx-auto'>
-            <div className="card card-side bg-base-100 shadow-xl my-20 h-[600px] rounded-none">
+            <div className="card card-side bg-[#E5E0FF] shadow-xl my-20 h-[600px] rounded-none">
                 <figure><img className="w-[600px] h-[600px]" src={details.image} /></figure>
                 <div className="card-body mt-10 ">
                     <h2 className="card-title font-bold text-4xl">{details.name}</h2>
@@ -40,7 +40,7 @@ const Details = () => {
 
                     <div className="card-actions justify-end">
                         <p className="font-bold text-xl  ">${details.price}</p>
-                        <button onClick={hadnleAddToCart} className="btn btn-primary  bg-[#2f3242] text-white border-hidden rounded-none mb-5 mr-5 ">Add Cart</button>
+                        <button onClick={hadnleAddToCart} className="btn btn-primary  bg-[#2f3242] hover:bg-[#E5E0FF] hover:text-black text-white border-hidden rounded-none mb-5 mr-5 ">Add Cart</button>
                     </div>
                 </div>
             </div>

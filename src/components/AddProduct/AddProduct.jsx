@@ -52,12 +52,12 @@ const AddProduct = () => {
 
 
     return (
-        <div className="bg-green-100 my-16 p-20 max-w-[1550px] mx-auto">
+        <div className="bg-[#E5E0FF] my-16 p-20 max-w-[1550px] mx-auto  shadow-xl">
 
 
 
             <h2 className="text-3xl font-extrabold">Add a Car</h2>
-            <form onSubmit={handleAddCoffee}>
+            <form onSubmit={handleAddCoffee} >
                 {/* form name and quantity row */}
                 <div className="md:flex mb-8">
                     <div className="form-control md:w-1/2">
