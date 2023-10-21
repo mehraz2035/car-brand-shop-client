@@ -15,7 +15,9 @@ import SignIn from './components/SignIn.jsx';
 import AuthProvidres from './providres/AuthProvidres.jsx';
 import Cars from './components/AllCarBrand/Cars.jsx';
 import Details from './components/Details.jsx';
+
 import PrivateRoute from './providres/PrivateRoute.jsx';
+import Error from './components/Error/Error';
 
 
 
@@ -26,6 +28,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App></App>,
     loader: () => fetch('https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/coffee'),
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -59,7 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element:<Details></Details>
+        element: <PrivateRoute><Details></Details></PrivateRoute>
       }
 
     ]
