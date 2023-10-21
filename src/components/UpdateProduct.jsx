@@ -9,7 +9,7 @@ const UpdateProduct = () => {
     const [details, setDetails] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/cars/${id}`)
+        fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars/${id}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -17,9 +17,48 @@ const UpdateProduct = () => {
             });
     }, [id]); // Include id as a dependency in the useEffect dependency array
 
+    // const handleUpdate = event => {
+    //     event.preventDefault();
+
+        // const form = event.target;
+        // const image = form.image.value;
+        // const name = form.name.value;
+        // const brand = form.brand.value;
+        // const category = form.category.value;
+        // const price = form.price.value;
+        // const description = form.description.value;
+        // const rating = form.rating.value;
+
+        // const formUpdate = { image, name, brand, category, price, description, rating }
+        // console.log(formUpdate)
+
+    //     fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars/${id}`, {
+    //         method: "put",
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(formUpdate)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             if (data.insertedId) {
+    //                 Swal.fire({
+    //                     title: 'Success!',
+    //                     text: 'Car Added Successfully',
+    //                     icon: 'success',
+    //                     confirmButtonText: 'OK'
+    //                 })
+
+    //             }
+    //         })
+    // }
+
+
+
     const handleUpdate = event => {
         event.preventDefault();
-
+    
         const form = event.target;
         const image = form.image.value;
         const name = form.name.value;
@@ -31,39 +70,42 @@ const UpdateProduct = () => {
 
         const formUpdate = { image, name, brand, category, price, description, rating }
         console.log(formUpdate)
-
-        fetch(`http://localhost:5000/cars/${id}`, {
+    
+        fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars/${id}`, {
             method: "put",
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(formUpdate)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.insertedId) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Car update Successfully',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    })
-
-                }
-            })
-    }
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.modifiedCount) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Car Updated Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                
+            }
+             else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to update car details',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+       
+    };
+    
 
 
     return (
-        // <div>
-        //    <form onSubmit={handleUpdate} action="">
-        //     <input type="text" placeholder={details.name} name="name" />
-        //     <input type="text" placeholder={details.brand} name="brand" /> <br />
-        //     <input type="submit" value="Update" />
-
-        //    </form>
-        // </div>
+        
 
 
 
@@ -143,7 +185,7 @@ const UpdateProduct = () => {
                         </label>
                     </div>
                 </div>
-                <input type="submit" value="Update Car" className="btn btn-block bg-black text-white hover:text-black" />
+                <input type="submit" value="Submit" className="btn btn-block bg-black text-white hover:text-black" />
 
             </form>
 

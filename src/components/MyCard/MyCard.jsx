@@ -1,20 +1,31 @@
 import { useLoaderData } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const MyCard = () => {
     const cartitems = useLoaderData();
 
     const handleRemove = (id) => {
         console.log("Remove button clicked", id);
-        fetch(`http://localhost:5000/cart/${id}`, {
+        fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cart/${id}`, {
             method: "DELETE",
         })
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
                 if (data.deletedCount > 0) {
-                    alert("Product removed from cart");
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Car Remove Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
                 } else {
-                    alert("Product removal failed");
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Car not remove Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
                 }
             });
     };

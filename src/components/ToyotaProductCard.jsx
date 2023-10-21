@@ -20,7 +20,7 @@
 //             if (result.isConfirmed) {
 
 
-//                 fetch(`http://localhost:5000/coffee/${_id}`, {
+//                 fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/coffee/${_id}`, {
 //                     method: 'DELETE'
 //                 })
 //                     .then(res => res.json())

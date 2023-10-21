@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Details = () => {
     const { id } = useParams();
     const [details, setDetails] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/cars/${id}`)
+        fetch(`https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars/${id}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -14,10 +15,11 @@ const Details = () => {
             });
     }, [id]); // Include id as a dependency in the useEffect dependency array
 
+   
     const hadnleAddToCart = () => {
 
 
-        fetch("http://localhost:5000/cart", {
+        fetch("https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cart", {
             method: "post",
             headers: {
                 "content-type": "application/json",
@@ -27,6 +29,16 @@ const Details = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Car update Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+
+                }
+                
             });
     };
 

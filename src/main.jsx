@@ -25,12 +25,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App></App>,
-    loader: () => fetch('http://localhost:5000/coffee'),
+    loader: () => fetch('https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/coffee'),
     children: [
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/coffee')
+        loader: () => fetch('https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/coffee')
       },
       {
         path: "addProduct",
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       {
         path: "/mycard",
         element: <MyCard></MyCard>,
-        loader: () => fetch('http://localhost:5000/cart')
+        loader: () => fetch('https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cart')
       },
       {
         path: "signup",

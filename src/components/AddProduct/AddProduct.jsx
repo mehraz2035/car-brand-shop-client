@@ -22,7 +22,7 @@ const AddProduct = () => {
         console.log(newCar);
 
         // server site data send dont touch
-        fetch('http://localhost:5000/cars', {
+        fetch('https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/cars', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

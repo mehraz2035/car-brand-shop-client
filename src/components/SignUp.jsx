@@ -1,45 +1,79 @@
-import { useContext } from "react";
-import { AuthContext } from "../providres/AuthProvidres";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 
+import { Link } from "react-router-dom";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase/firebase.config"; // Assuming you have the Firebase Storage config in firebase.config.js
+import { AuthContext } from "../providres/AuthProvidres";
+
+function fileToUint8Array(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const arrayBuffer = reader.result;
+      const uint8Array = new Uint8Array(arrayBuffer);
+      resolve(uint8Array);
+    };
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(file);
+  });
+}
 
 const SignUp = () => {
+  const { createAccount, updateUserProfile, googleLogin } = useContext(AuthContext);
 
-    const { createAccount, googleLogin } = useContext(AuthContext);
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const image = form.image.files[0]; // Get the selected image file
 
-    const handleSignUp = e => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const image = form.image.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(name, image, email, password);
-        createAccount(name, image, email, password
-        )
-            .then(result => {
-                console.log(result.user)
+    const email = form.email.value;
+    const password = form.password.value;
 
-                const createdAt = result.user?.metadata?.creationTime;
-                const user = { email, createdAt: createdAt };
-                fetch('http://localhost:5000/user', {
-                    method: 'POST',
+    try {
+      // Create a Uint8Array from the image file
+      const uint8Array = await fileToUint8Array(image);
+
+      createAccount(email, password)
+        .then((result) => {
+          const createdAt = result.user?.metadata?.creationTime;
+          const user = { email, createdAt: createdAt };
+
+          // Upload the user's image to Firebase Storage
+          const storageRef = ref(storage, `user-images/${result.user.uid}/${image.name}`);
+          uploadBytes(storageRef, uint8Array).then(() => {
+            // Get the download URL of the uploaded image
+            getDownloadURL(storageRef).then((downloadURL) => {
+              // Update user profile with name and image URL
+              updateUserProfile(name, downloadURL)
+                .then(() => {
+                  fetch("https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/user", {
+                    method: "POST",
                     headers: {
-                        'content-type': 'application/json'
+                      "content-type": "application/json",
                     },
-                    body: JSON.stringify(user)
+                    body: JSON.stringify(user),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.insertedId) {
+                        console.log("user added to user data");
+                      }
+                    });
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.insertedId) {
-                            console.log('user adding to user data')
-                        }
-                    })
-            })
-            .catch(error => {
-                console.error(error)
-            })
+                .catch((error) => {
+                  console.error(error);
+                });
+            });
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
     }
+  };
 
     return (
         <div className="hero  bg-base-200 border-2">
@@ -82,7 +116,7 @@ const SignUp = () => {
                             <p className="py-6 text-center">Already have an account? <span className=" text-blue-600 font-semibold"><Link to="/signin">Sign In</Link></span> </p>
                         </div>
                         <div className="flex justify-center">
-                            <button className=" btn text-xl  flex items-center gap-2"><p>Google</p><img className="w-6 h-6  " src="https://i.ibb.co/tKWsFHK/Google-G-Logo-svg.webp" alt="" /></button>
+                            <button onClick={googleLogin} className=" btn text-xl  flex items-center gap-2"><p>Google</p><img className="w-6 h-6  " src="https://i.ibb.co/tKWsFHK/Google-G-Logo-svg.webp" alt="" /></button>
                         </div>
                     </form>
                 </div>

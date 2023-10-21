@@ -6,7 +6,7 @@ const AllCarBrand = () => {
     const [brands, setBrand] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/brands')
+        fetch('https://car-brand-shop-server-i6v9pxbdj-mehraz2035.vercel.app/brands')
             .then(res => res.json())
             .then(data => {
                 console.log(data)
