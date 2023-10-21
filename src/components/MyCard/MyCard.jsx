@@ -26,6 +26,8 @@ const MyCard = () => {
                         icon: 'success',
                         confirmButtonText: 'OK'
                     })
+                    // const remaining = cart.filter(cof => cof._id !== id);
+                    //         setCart(remaining);
                 }
             });
     };

@@ -127,7 +127,7 @@ const AddProduct = () => {
                         </label>
                     </div>
                 </div>
-                <input  type="submit" value="Add Car" className="btn btn-block bg-black text-white hover:text-black" />
+                <input  type="submit" value="Submit" className="btn btn-block bg-black text-white hover:text-black" />
 
             </form>
 
